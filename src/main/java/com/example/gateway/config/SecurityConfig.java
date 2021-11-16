@@ -15,18 +15,16 @@ public class SecurityConfig {
     @Value("${spring.security.oauth2.resourceserver.jwt.audience}")
     private String audience;
 
-    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri:}")
+    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
     private String issuer;
 
     @Bean(name = "customJwtDecoder")
     JwtDecoder jwtDecoder() {
-        NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders.fromOidcIssuerLocation(issuer);
-
         OAuth2TokenValidator<Jwt> withAudience = new AudienceValidator(audience);
         OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuer);
         OAuth2TokenValidator<Jwt> validator = new DelegatingOAuth2TokenValidator<>(withAudience, withIssuer);
 
-
+        NimbusJwtDecoder jwtDecoder = JwtDecoders.fromOidcIssuerLocation(issuer);
         jwtDecoder.setJwtValidator(validator);
         return jwtDecoder;
     }

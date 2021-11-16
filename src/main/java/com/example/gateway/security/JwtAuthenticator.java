@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtAuthenticator {
 
-    private JwtExtractor extractor;
+    private final JwtExtractor extractor;
 
-    private JwtDecoder decoder;
+    private final JwtDecoder decoder;
 
     @Autowired
     public JwtAuthenticator(JwtExtractor extractor, JwtDecoder decoder) {
@@ -27,8 +27,7 @@ public class JwtAuthenticator {
         String token = extractor.extract(request);
 
         try {
-            Jwt jwt = decoder.decode(token);
-            return jwt;
+            return decoder.decode(token);
         } catch (JwtException e) {
             log.error(e.getMessage());
             throw new AuthenticationException("Invalid token!");

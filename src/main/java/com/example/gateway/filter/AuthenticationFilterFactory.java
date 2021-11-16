@@ -29,10 +29,7 @@ public class AuthenticationFilterFactory extends AbstractGatewayFilterFactory {
         return ((exchange, chain) -> {
             Route route = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
             if (route != null) {
-                boolean success = false;
-                if (authenticate(exchange, authenticator)) {
-                    success = true;
-                }
+                boolean success = authenticate(exchange, authenticator);
 
                 if (!success) {
                     throw new AuthenticationException("Authentication failed");
