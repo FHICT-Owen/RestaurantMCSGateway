@@ -24,9 +24,9 @@ spring:
           uri: lb://RESTAURANT-SERVICE
           predicates:
             - Path=/api/v1/**
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: ${DOMAIN}
-#          audience: ${AUDIENCE}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${DOMAIN}
+          audience: ${DOMAIN}api/v2/
