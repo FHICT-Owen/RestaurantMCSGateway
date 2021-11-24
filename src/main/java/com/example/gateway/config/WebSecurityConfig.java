@@ -13,7 +13,7 @@ public class WebSecurityConfig {
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http.csrf().disable()
                 .authorizeExchange()
-                .pathMatchers(HttpMethod.GET, "/**").permitAll()
+                .pathMatchers(HttpMethod.GET, "/register").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .build();
