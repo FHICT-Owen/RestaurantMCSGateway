@@ -24,10 +24,10 @@ spring:
           uri: lb://restaurant-service
           predicates:
             - Path=/api/v1/restaurant, /api/v1/ingredient, /api/v1/table
-#        - id: notification-service
-#          uri: lb://notification-service
-#          predicates:
-#            - Path=/api/v1/**
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/register
   security:
     oauth2:
       resourceserver:
