@@ -13,9 +13,11 @@ public class WebSecurityConfig {
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http.csrf().disable()
                 .authorizeExchange()
-                .pathMatchers(HttpMethod.GET, "/**").permitAll()
+                .pathMatchers(HttpMethod.GET, "/api/v1/dish").permitAll()
+                .pathMatchers(HttpMethod.GET, "/api/v1/categories").permitAll()
+                .pathMatchers(HttpMethod.GET, "/api/v1/ingredient").permitAll()
+                .pathMatchers(HttpMethod.GET, "/register").permitAll()
                 .anyExchange().authenticated()
-                .and()
-                .build();
+                .and().build();
     }
 }
