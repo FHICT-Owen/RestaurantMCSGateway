@@ -15,15 +15,15 @@ spring:
         - id: menu-service
           uri: lb://menu-service
           predicates:
-            - Path=/api/v1/dish, /api/v1/categories
+            - Path=/api/v1/dish, /api/v1/dish/**, /api/v1/categories, /api/v1/categories/**
         - id: session-service
           uri: lb://session-service
           predicates:
-            - Path=/api/v1/session, /api/v1/order
+            - Path=/api/v1/session, /api/v1/session/**, /api/v1/order, /api/v1/order/**
         - id: restaurant-service
           uri: lb://restaurant-service
           predicates:
-            - Path=/api/v1/restaurant, /api/v1/ingredient, /api/v1/table
+            - Path=/api/v1/restaurant, /api/v1/restaurant/**, /api/v1/ingredient, /api/v1/ingredient/**, /api/v1/table, /api/v1/table/**
         - id: notification-service
           uri: lb://notification-service
           predicates:
