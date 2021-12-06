@@ -27,10 +27,11 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http.authorizeExchange()
+        http.csrf().disable().authorizeExchange()
                 .pathMatchers(HttpMethod.GET, "/api/v1/dish").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/categories").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/ingredient").permitAll()
+                .pathMatchers(HttpMethod.POST, "/api/v1/order").permitAll()
                 .pathMatchers(HttpMethod.GET, "/register").permitAll()
                 .anyExchange().authenticated()
                 .and().cors().configurationSource(corsConfigurationSource())
