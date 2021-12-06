@@ -9,6 +9,8 @@ eureka:
 spring:
   application:
     name: proxy
+  config:
+    import: optional:file:../.env[.properties]
   cloud:
     gateway:
       routes:
