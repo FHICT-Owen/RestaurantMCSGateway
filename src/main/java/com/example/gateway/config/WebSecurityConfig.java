@@ -30,6 +30,7 @@ public class WebSecurityConfig {
         http.csrf().disable().authorizeExchange()
                 .pathMatchers(HttpMethod.GET, "/api/v1/dish").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/categories").permitAll()
+                .pathMatchers(HttpMethod.GET, "/api/v1/restaurant").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/ingredient").permitAll()
                 .pathMatchers(HttpMethod.POST, "/api/v1/order").permitAll()
                 .pathMatchers(HttpMethod.GET, "/register").permitAll()
