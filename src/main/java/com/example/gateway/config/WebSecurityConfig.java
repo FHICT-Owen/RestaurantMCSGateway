@@ -19,25 +19,9 @@ import java.util.List;
 @EnableWebFluxSecurity
 public class WebSecurityConfig {
 
-    @Value("${spring.security.oauth2.resourceserver.jwt.audience}")
-    private String audience;
-
-    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
-    private String issuer;
-
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http.csrf().disable().authorizeExchange()
-                .pathMatchers(HttpMethod.GET, "/api/v1/dish").permitAll()
-                .pathMatchers(HttpMethod.GET, "/api/v1/category").permitAll()
-                .pathMatchers(HttpMethod.GET, "/api/v1/restaurant").permitAll()
-                .pathMatchers(HttpMethod.GET, "/api/v1/ingredient").permitAll()
-                .pathMatchers(HttpMethod.POST, "/api/v1/order").permitAll()
-                .pathMatchers(HttpMethod.GET, "/register").permitAll()
-                .anyExchange().authenticated()
-                .and().cors().configurationSource(corsConfigurationSource())
-                .and().oauth2ResourceServer()
-                .jwt().jwtDecoder(jwtDecoder());
+        http.csrf().disable().cors().configurationSource(corsConfigurationSource());
         return http.build();
     }
 
@@ -53,15 +37,5 @@ public class WebSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
         return source;
-    }
-
-    ReactiveJwtDecoder jwtDecoder() {
-        OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(audience);
-        OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuer);
-        OAuth2TokenValidator<Jwt> withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer, audienceValidator);
-
-        NimbusReactiveJwtDecoder jwtDecoder = (NimbusReactiveJwtDecoder) ReactiveJwtDecoders.fromOidcIssuerLocation(issuer);
-        jwtDecoder.setJwtValidator(withAudience);
-        return jwtDecoder;
     }
 }

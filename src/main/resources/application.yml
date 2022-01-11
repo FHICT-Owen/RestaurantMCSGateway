@@ -30,9 +30,3 @@ spring:
           uri: lb://notification-service
           predicates:
             - Path=/register
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${DOMAIN}
-          audience: ${DOMAIN}api/v2/
