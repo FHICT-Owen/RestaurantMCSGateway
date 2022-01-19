@@ -4,9 +4,9 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: ${DISCOVERY_URL}
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761/eureka}
       non-secure-port: 80
-      secure-port: 443
+      secure-port: 443      
 
 spring:
   application:
@@ -31,4 +31,4 @@ spring:
         - id: notification-service
           uri: lb://notification-service
           predicates:
-            - Path=/register
+            - Path=/register, /api/v1/notify/user-order-update
