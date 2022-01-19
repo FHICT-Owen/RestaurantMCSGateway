@@ -29,4 +29,4 @@ spring:
         - id: notification-service
           uri: lb://notification-service
           predicates:
-            - Path=/register
+            - Path=/register, /api/v1/notify/user-order-update
