@@ -16,18 +16,18 @@ spring:
     gateway:
       routes:
         - id: menu-service
-          uri: lb://menu-service
+          uri: ${MENU_URL:lb://menu-service}
           predicates:
             - Path=/api/v1/dish, /api/v1/dish/**, /api/v1/category, /api/v1/category/**
         - id: session-service
-          uri: lb://session-service
+          uri: ${SESSION_URL:lb://session-service}
           predicates:
             - Path=/api/v1/session, /api/v1/session/**, /api/v1/order, /api/v1/order/**
         - id: restaurant-service
-          uri: lb://restaurant-service
+          uri: ${RESTAURANT_URL:lb://restaurant-service}
           predicates:
             - Path=/api/v1/restaurant, /api/v1/restaurant/**, /api/v1/ingredient, /api/v1/ingredient/**, /api/v1/table, /api/v1/table/**
         - id: notification-service
-          uri: lb://notification-service
+          uri: ${NOTIFICATION_URL:lb://notification-service}
           predicates:
             - Path=/register, /api/v1/notify/user-order-update
